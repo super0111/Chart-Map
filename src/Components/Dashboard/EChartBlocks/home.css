@@ -1,0 +1,29 @@
+.container {
+	left: 10vw;
+	margin: 0px;
+	padding: 10px;
+	position: absolute;
+	border-right: 1px;
+	width: 100vw;
+	height: 1000px;
+}
+.echarts {
+	margin: 10px;
+	padding: 0px;
+	/* position: absolute; */
+	border-right: 1px;
+	/* width: 110vw; */
+	/* top: 20vh; */
+	/* left: 10vw; */
+	/* height: 50vh !important; */
+}
+.topology-echarts {
+	margin: 10px;
+	padding: 0px;
+	position: absolute;
+	border-right: 1px;
+	width: 110vw;
+	top: 20vh;
+	left: 10vw;
+	height: 50vh !important;
+}

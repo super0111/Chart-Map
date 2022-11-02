@@ -1,0 +1,39 @@
+/* .gmnoprint{
+	display: grid !important;
+	transform: scale(1.5);
+	left: 10px !important;
+}
+.gm-style-mtc{
+	display: none;
+} */
+::-webkit-scrollbar {
+	width: 4px;
+	height: 0px;
+}
+#toggler{
+	position: absolute;
+	left: calc(50vw - 60px);
+	top: -20px; 
+	padding: 10px 25px 10px 0px;
+	background: white;
+	border-radius: 10px;
+	transform: rotate(-90deg) ;
+	cursor: pointer;
+	transition: 0.1s;	
+}
+#toggle-menu{
+	background-color: #fff;
+	width: 480px;
+	height: 35px;
+	position: absolute;
+	left: calc(50vw - 300px);
+	top: -50px;
+	display: flex;
+	justify-content: space-between;
+	transition: 0.1s;
+}
+#toggle-menu:hover, #toggler:hover {background-color: #ffffff}
+#toggle-menu:active, #toggler:active {
+	background-color: #fff;
+	box-shadow: 4px 1px 25px #8c7b7b;
+}

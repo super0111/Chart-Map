@@ -1,0 +1,60 @@
+.container {
+    left: 10vw;
+    margin: 0px;
+    padding: 10px;
+    position: absolute;
+    border-right: 1px;
+    width: 100vw;
+    height: 1000px;
+}
+.echarts {
+    margin: 10px;
+    padding: 0px;
+    /* position: absolute; */
+    border-right: 1px;
+    width: 110vw;
+    /* top: 20vh; */
+    /* left: 10vw; */
+    height: 50vh !important;
+}
+.echarts-new {
+    padding: 0px;
+    width: 100%;
+}
+.echarts-new > div{
+    position:relative !important;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+}
+
+.echarts-meter-log{
+    padding: 0px;
+    width: 100%;
+}
+.echarts-meter-log > div{
+    position:relative !important;
+    margin: 0px;
+    height: calc(90vh - 64px) !important;
+    padding: 0px;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+}
+.echarts-calendar{
+    height: calc(98vh - 64px);
+}
+.echarts-calendar > div{
+    position:relative !important;
+    margin: 0px;
+    height: 100% !important;
+    padding: 0px;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+}
+.alarm-notifications-table{
+    padding: 10px;
+}

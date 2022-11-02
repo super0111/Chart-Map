@@ -1,0 +1,9 @@
+{
+	"name": " Kamati Hasheela",
+	"age": 30,
+	"address": {
+		"street": "Simpson str",
+		"city": "Windhoek"
+	},
+	"WorkExperience": [ "MTN", "MTN", "Ceragon" ]
+}
