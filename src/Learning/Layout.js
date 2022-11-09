@@ -1,27 +1,21 @@
 import React, { Component } from 'react';
+import { useState } from 'react';
 import Header from './Header';
 
-export class Layout extends Component {
-	constructor() {
-		super();
-		this.state = {
-			title: 'Personal Profile',
-			Name: '',
-			Surname: ''
-		};
+export default function Layout() {
+	const [ state, setState ] = useState({
+		title: 'Personal Profile',
+		Name: '',
+		Surname: ''
+	})
+
+	const changeNames = (Name, Surname) => {
+		setState({ Name: Name, Surname: Surname });
 	}
 
-	changeNames(Name, Surname) {
-		this.setState({ Name: Name, Surname: Surname });
-	}
-
-	render() {
-		return (
-			<div>
-				<Header changeNames={this.changeNames.bind(this)} title={this.state.title} />
-			</div>
-		);
-	}
+	return (
+		<div>
+			<Header changeNames={changeNames} title={this.state.title} />
+		</div>
+	);
 }
-
-export default Layout;

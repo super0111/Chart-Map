@@ -76,7 +76,7 @@ export default function Dashboard() {
   };
 
 	return (
-		<div style={{display: 'flex'}}>
+		<div style={{display: 'flex', background: "#fafafa"}}>
 			<CssBaseline />
 			<AppBar position='absolute' />
       <Drawer 

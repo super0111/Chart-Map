@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Bar, Doughnut, Line, Pie, Polar, Radar } from 'react-chartjs-2';
 
 import {
@@ -152,67 +152,63 @@ const mainChartOpts = {
 		}
 	}
 };
-export class SystemChart extends Component {
-	render() {
-		return (
-			<div>
-				<Row>
-					<Col>
-						<Card>
-							<CardBody>
-								<Row>
-									<Col sm='5'>
-										<CardTitle className='mb-0'>Total System Load </CardTitle>
-										<div className='small text-muted'>May 2020</div>
-									</Col>
-									<Col sm='7' className='d-none d-sm-inline-block'>
-										<Button color='primary' className='float-right'>
-											<i className='icon-cloud-download' />
-										</Button>
-										<ButtonToolbar className='float-right' aria-label='Toolbar with button groups'>
-											<ButtonGroup className='mr-3' aria-label='First group'>
-												<Button color='outline-secondary'>Day</Button>
-												<Button color='outline-secondary'>Month</Button>
-												<Button color='outline-secondary'>Year</Button>
-											</ButtonGroup>
-										</ButtonToolbar>
-									</Col>
-								</Row>
-								<div className='chart-wrapper' style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
-									<Line data={mainChart} options={mainChartOpts} height={300} />
-								</div>
-							</CardBody>
-							<CardFooter>
-								<Row className='text-center'>
-									<Col sm={12} md className='mb-sm-2 mb-0'>
-										<div className='text-muted'> Maximum</div>
-										<strong>29.703 KWH</strong>
-										<Progress className='progress-xs mt-2' color='success' value='40' />
-									</Col>
-									<Col sm={12} md className='mb-sm-2 mb-0 d-md-down-none'>
-										<div className='text-muted'>Minimum</div>
-										<strong>24.093 KWH</strong>
-										<Progress className='progress-xs mt-2' color='info' value='20' />
-									</Col>
-									<Col sm={12} md className='mb-sm-2 mb-0'>
-										<div className='text-muted'>Average</div>
-										<strong>78.706 KWH</strong>
-										<Progress className='progress-xs mt-2' color='warning' value='60' />
-									</Col>
+export default function SystemChart() {
+	return (
+		<div>
+			<Row>
+				<Col>
+					<Card>
+						<CardBody>
+							<Row>
+								<Col sm='5'>
+									<CardTitle className='mb-0'>Total System Load </CardTitle>
+									<div className='small text-muted'>May 2020</div>
+								</Col>
+								<Col sm='7' className='d-none d-sm-inline-block'>
+									<Button color='primary' className='float-right'>
+										<i className='icon-cloud-download' />
+									</Button>
+									<ButtonToolbar className='float-right' aria-label='Toolbar with button groups'>
+										<ButtonGroup className='mr-3' aria-label='First group'>
+											<Button color='outline-secondary'>Day</Button>
+											<Button color='outline-secondary'>Month</Button>
+											<Button color='outline-secondary'>Year</Button>
+										</ButtonGroup>
+									</ButtonToolbar>
+								</Col>
+							</Row>
+							<div className='chart-wrapper' style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
+								<Line data={mainChart} options={mainChartOpts} height={300} />
+							</div>
+						</CardBody>
+						<CardFooter>
+							<Row className='text-center'>
+								<Col sm={12} md className='mb-sm-2 mb-0'>
+									<div className='text-muted'> Maximum</div>
+									<strong>29.703 KWH</strong>
+									<Progress className='progress-xs mt-2' color='success' value='40' />
+								</Col>
+								<Col sm={12} md className='mb-sm-2 mb-0 d-md-down-none'>
+									<div className='text-muted'>Minimum</div>
+									<strong>24.093 KWH</strong>
+									<Progress className='progress-xs mt-2' color='info' value='20' />
+								</Col>
+								<Col sm={12} md className='mb-sm-2 mb-0'>
+									<div className='text-muted'>Average</div>
+									<strong>78.706 KWH</strong>
+									<Progress className='progress-xs mt-2' color='warning' value='60' />
+								</Col>
 
-									<Col sm={12} md className='mb-sm-2 mb-0 d-md-down-none'>
-										<div className='text-muted'>Current</div>
-										<strong>65.132 KWH</strong>
-										<Progress className='progress-xs mt-2' color='primary' value='40' />
-									</Col>
-								</Row>
-							</CardFooter>
-						</Card>
-					</Col>
-				</Row>
-			</div>
-		);
-	}
+								<Col sm={12} md className='mb-sm-2 mb-0 d-md-down-none'>
+									<div className='text-muted'>Current</div>
+									<strong>65.132 KWH</strong>
+									<Progress className='progress-xs mt-2' color='primary' value='40' />
+								</Col>
+							</Row>
+						</CardFooter>
+					</Card>
+				</Col>
+			</Row>
+		</div>
+	);
 }
-
-export default SystemChart;

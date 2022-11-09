@@ -1,10 +1,9 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow, Polyline } from 'react-google-maps';
 import GridTopology from '../GridTopology/gridTopology';
 
 const useFetch = (url) => {
 	const [ meterData, setMeterdata ] = useState(null);
-	console.log('data.Server_response');
 	useEffect(() => {
 		async function fetchData() {
 			var resquestType = {
@@ -134,21 +133,17 @@ function Map() {
 }
 
 const WrappedMap = withScriptjs(withGoogleMap(Map));
-export class HomeMaps extends Component {
-	render() {
-		return (
-			<div>
-				<WrappedMap
-					googleMapURL={
-						'https://maps.googleapis.com/maps/api/js?key=AIzaSyAX7CGyLu3H3AfDxa6-YOhGInraceFUiow&callback=initMap'
-					}
-					loadingElement={<div style={{ height: `100%` }} />}
-					containerElement={<div style={{ height: `100vh` }} />}
-					mapElement={<div style={{ height: `100%` }} />}
-				/>
-			</div>
-		);
-	}
+export default function HomeMaps() {
+	return (
+		<div>
+			<WrappedMap
+				googleMapURL={
+					'https://maps.googleapis.com/maps/api/js?key=AIzaSyAX7CGyLu3H3AfDxa6-YOhGInraceFUiow&callback=initMap'
+				}
+				loadingElement={<div style={{ height: `100%` }} />}
+				containerElement={<div style={{ height: `100vh` }} />}
+				mapElement={<div style={{ height: `100%` }} />}
+			/>
+		</div>
+	);
 }
-
-export default HomeMaps;

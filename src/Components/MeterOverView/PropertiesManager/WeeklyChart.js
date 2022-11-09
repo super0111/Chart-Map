@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Badge, Card, CardBody, CardHeader, Col, Progress, Row, Table } from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { DataTable, TableHeader } from 'react-mdl';
@@ -99,110 +99,106 @@ const sparklineChartOpts = {
 		display: false
 	}
 };
-export class WeeklyChart extends Component {
-	render() {
-		return (
-			<div>
-				<Row>
-					<Col>
-						<Card>
-							<CardHeader>Sytem Summary</CardHeader>
-							<CardBody>
-								<Row>
-									<Col xs='12' md='6' xl='6'>
-										<hr className='mt-0' />
-										<div className='progress-group mb-4'>
-											<div className='progress-group-prepend'>
-												<span className='progress-group-text'>Monday</span>
-											</div>
-											<div className='progress-group-bars'>
-												<Progress className='progress-xs' color='info' value='34' />
-												<Progress className='progress-xs' color='danger' value='78' />
-											</div>
+export default function WeeklyChart() {
+	return (
+		<div>
+			<Row>
+				<Col>
+					<Card>
+						<CardHeader>Sytem Summary</CardHeader>
+						<CardBody>
+							<Row>
+								<Col xs='12' md='6' xl='6'>
+									<hr className='mt-0' />
+									<div className='progress-group mb-4'>
+										<div className='progress-group-prepend'>
+											<span className='progress-group-text'>Monday</span>
 										</div>
-										<div className='progress-group mb-4'>
-											<div className='progress-group-prepend'>
-												<span className='progress-group-text'>Tuesday</span>
-											</div>
-											<div className='progress-group-bars'>
-												<Progress className='progress-xs' color='info' value='56' />
-												<Progress className='progress-xs' color='danger' value='94' />
-											</div>
+										<div className='progress-group-bars'>
+											<Progress className='progress-xs' color='info' value='34' />
+											<Progress className='progress-xs' color='danger' value='78' />
 										</div>
-										<div className='progress-group mb-4'>
-											<div className='progress-group-prepend'>
-												<span className='progress-group-text'>Wednesday</span>
-											</div>
-											<div className='progress-group-bars'>
-												<Progress className='progress-xs' color='info' value='12' />
-												<Progress className='progress-xs' color='danger' value='67' />
-											</div>
+									</div>
+									<div className='progress-group mb-4'>
+										<div className='progress-group-prepend'>
+											<span className='progress-group-text'>Tuesday</span>
 										</div>
-										<div className='progress-group mb-4'>
-											<div className='progress-group-prepend'>
-												<span className='progress-group-text'>Thursday</span>
-											</div>
-											<div className='progress-group-bars'>
-												<Progress className='progress-xs' color='info' value='43' />
-												<Progress className='progress-xs' color='danger' value='91' />
-											</div>
+										<div className='progress-group-bars'>
+											<Progress className='progress-xs' color='info' value='56' />
+											<Progress className='progress-xs' color='danger' value='94' />
 										</div>
-										<div className='progress-group mb-4'>
-											<div className='progress-group-prepend'>
-												<span className='progress-group-text'>Friday</span>
-											</div>
-											<div className='progress-group-bars'>
-												<Progress className='progress-xs' color='info' value='22' />
-												<Progress className='progress-xs' color='danger' value='73' />
-											</div>
+									</div>
+									<div className='progress-group mb-4'>
+										<div className='progress-group-prepend'>
+											<span className='progress-group-text'>Wednesday</span>
 										</div>
-										<div className='progress-group mb-4'>
-											<div className='progress-group-prepend'>
-												<span className='progress-group-text'>Saturday</span>
-											</div>
-											<div className='progress-group-bars'>
-												<Progress className='progress-xs' color='info' value='53' />
-												<Progress className='progress-xs' color='danger' value='82' />
-											</div>
+										<div className='progress-group-bars'>
+											<Progress className='progress-xs' color='info' value='12' />
+											<Progress className='progress-xs' color='danger' value='67' />
 										</div>
-										<div className='progress-group mb-4'>
-											<div className='progress-group-prepend'>
-												<span className='progress-group-text'>Sunday</span>
-											</div>
-											<div className='progress-group-bars'>
-												<Progress className='progress-xs' color='info' value='9' />
-												<Progress className='progress-xs' color='danger' value='69' />
-											</div>
+									</div>
+									<div className='progress-group mb-4'>
+										<div className='progress-group-prepend'>
+											<span className='progress-group-text'>Thursday</span>
 										</div>
-										<div className='legend text-center'>
-											<small>
-												<sup className='px-1'>
-													<Badge pill color='info'>
-														&nbsp;
-													</Badge>
-												</sup>
-												This Week &nbsp;
-												<sup className='px-1'>
-													<Badge pill color='danger'>
-														&nbsp;
-													</Badge>
-												</sup>
-												Last Week
-											</small>
+										<div className='progress-group-bars'>
+											<Progress className='progress-xs' color='info' value='43' />
+											<Progress className='progress-xs' color='danger' value='91' />
 										</div>
-									</Col>
-									<Col>
-										<Orders />
-									</Col>
-								</Row>
-								<br />
-							</CardBody>
-						</Card>
-					</Col>
-				</Row>
-			</div>
-		);
-	}
+									</div>
+									<div className='progress-group mb-4'>
+										<div className='progress-group-prepend'>
+											<span className='progress-group-text'>Friday</span>
+										</div>
+										<div className='progress-group-bars'>
+											<Progress className='progress-xs' color='info' value='22' />
+											<Progress className='progress-xs' color='danger' value='73' />
+										</div>
+									</div>
+									<div className='progress-group mb-4'>
+										<div className='progress-group-prepend'>
+											<span className='progress-group-text'>Saturday</span>
+										</div>
+										<div className='progress-group-bars'>
+											<Progress className='progress-xs' color='info' value='53' />
+											<Progress className='progress-xs' color='danger' value='82' />
+										</div>
+									</div>
+									<div className='progress-group mb-4'>
+										<div className='progress-group-prepend'>
+											<span className='progress-group-text'>Sunday</span>
+										</div>
+										<div className='progress-group-bars'>
+											<Progress className='progress-xs' color='info' value='9' />
+											<Progress className='progress-xs' color='danger' value='69' />
+										</div>
+									</div>
+									<div className='legend text-center'>
+										<small>
+											<sup className='px-1'>
+												<Badge pill color='info'>
+													&nbsp;
+												</Badge>
+											</sup>
+											This Week &nbsp;
+											<sup className='px-1'>
+												<Badge pill color='danger'>
+													&nbsp;
+												</Badge>
+											</sup>
+											Last Week
+										</small>
+									</div>
+								</Col>
+								<Col>
+									<Orders />
+								</Col>
+							</Row>
+							<br />
+						</CardBody>
+					</Card>
+				</Col>
+			</Row>
+		</div>
+	);
 }
-
-export default WeeklyChart;

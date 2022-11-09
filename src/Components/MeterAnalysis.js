@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import MaterialTable from 'material-table';
 import { Grid } from '@mui/material';
 import UserToolbar from './Table/UserToolbar';
 import MapIcon from '@mui/icons-material/Map';
 
-export class MainTable extends Component {
-	state = {
-		meterData: []
-	};
-	stateData = {
+import { ThemeProvider, createTheme } from '@mui/material'
+
+export default function MainTable() {
+
+	const defaultMaterialTheme = createTheme()
+
+	let history = useHistory();
+	const [ stateValue, setState ] = useState({
 		meterData: [],
 		ColumData: [
 			{ title: 'ID', field: 'ID' },
@@ -23,47 +27,50 @@ export class MainTable extends Component {
 			{ title: 'Phone Number', field: 'PhoneNumber' },
 			{ title: 'User Category', field: 'UserCategory' },
 			{ title: 'PhoneNumber', field: 'PhoneNumber' },
-
 			{ title: 'Registration Date', field: 'RegistrationDate', type: 'numeric' }
 		]
-	};
-	componentDidMount = async () => {
+	});
+	
+	useEffect(()=>{
 		var meterRequest = {
 			key: 'StartGRID2020',
 			SQLQuery: 'SELECT * FROM UserDetails '
 		};
-		//console.log(JSON.stringify(meterRequest));
-		const request = new Request('https://cors-anywhere.herokuapp.com/https://stargridx.net/GetUserProfile.php', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(meterRequest)
-		});
 
-		const api_call = await fetch(request);
-		const data = await api_call.json();
-		this.setState({ meterData: data.Server_response });
-		console.log(JSON.stringify(data));
-	};
+		const fetchPosts = async () => {
+			const request = new Request('https://cors-anywhere.herokuapp.com/https://stargridx.net/GetUserProfile.php', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(meterRequest)
+			});
 
-	handleMapIconClick = (event, rowData) => {
-		console.log(rowData);
+			const api_call = await fetch(request);
+			const data = await api_call.json();
+			setState({ meterData: data.Server_response });
+		}
+		fetchPosts();
+	}, [stateValue])
+
+	const handleMapIconClick = (event, rowData) => {
 		if(rowData['ID'] != null){
-			this.props.history.push({
+			history.push({
 				pathname: '/MapDash/Home2',
 				state: {meter: rowData['ID']}
 			});
 		}
 	};
 
-	render() {
-		if (this.state.meterData != null) {
-			return (
-				<div>
-					<Grid container direction='column' justify='space-evenly' alignItems='stretch'>
-						<Grid item lg={12} md={10} xl={12} xs={12}>
-							<UserToolbar />
+	return (
+		<>
+			{
+				stateValue.meterData != null ?
+				<Grid container direction='column' justify='space-evenly' alignItems='stretch'>
+					<Grid item lg={12} md={10} xl={12} xs={12} sx={{
+						maxWidth: "100% !important",
+					}}>
+						<UserToolbar />
+						<ThemeProvider theme={defaultMaterialTheme}>
 							<MaterialTable
-								// className={makeStyles.root}
 								title='Smart Meters'
 								columns={[
 									{ title: 'Surname', field: 'Surname' },
@@ -77,16 +84,15 @@ export class MainTable extends Component {
 									{ title: 'Phone Number', field: 'PhoneNumber' },
 									{ title: 'User Category', field: 'UserCategory' },
 									{ title: 'PhoneNumber', field: 'PhoneNumber' },
-
 									{ title: 'Registration Date', field: 'RegistrationDate', type: 'numeric' }
 								]}
-								data={this.state.meterData}
+								data={stateValue.meterData}
 								editable={{
 									onRowAdd: (newData) =>
 										new Promise((resolve) => {
 											setTimeout(() => {
 												resolve();
-												this.setState((prevState) => {
+												setState((prevState) => {
 													const data = [ ...prevState.data ];
 													data.push(newData);
 													return { ...prevState, data };
@@ -98,7 +104,7 @@ export class MainTable extends Component {
 											setTimeout(() => {
 												resolve();
 												if (oldData) {
-													this.setState((prevState) => {
+													setState((prevState) => {
 														const data = [ ...prevState.data ];
 														data[data.indexOf(oldData)] = newData;
 														return { ...prevState, data };
@@ -110,7 +116,7 @@ export class MainTable extends Component {
 										new Promise((resolve) => {
 											setTimeout(() => {
 												resolve();
-												this.setState((prevState) => {
+												setState((prevState) => {
 													const data = [ ...prevState.data ];
 													data.splice(data.indexOf(oldData), 1);
 													return { ...prevState, data };
@@ -122,63 +128,75 @@ export class MainTable extends Component {
 									{
 										icon: MapIcon,
 										tooltip: 'Show on Map',
-										onClick: this.handleMapIconClick
+										onClick: handleMapIconClick
 									}
 								]}
 							/>
-						</Grid>
+						</ThemeProvider>
+						
 					</Grid>
-				</div>
-			);
-		}
-		{
-			return (
-				<div>
-					<MaterialTable
-						title='Smart Meters'
-						columns={this.state.ColumData}
-						editable={{
-							onRowAdd: (newData) =>
-								new Promise((resolve) => {
-									setTimeout(() => {
-										resolve();
-										this.setState((prevState) => {
+				</Grid>
+				:
+				<MaterialTable
+					columns={[
+						{ title: "Adı", field: "name" },
+						{ title: "Soyadı", field: "surname" },
+						{ title: "Doğum Yılı", field: "birthYear", type: "numeric" },
+						{
+							title: "Doğum Yeri",
+							field: "birthCity",
+							lookup: { 34: "İstanbul", 63: "Şanlıurfa" },
+						},
+					]}
+					data={[
+						{
+							name: "Mehmet",
+							surname: "Baran",
+							birthYear: 1987,
+							birthCity: 63,
+						},
+					]}
+					title="Demo Title"
+					onPageChange={()=>console.log('ddddfff')}
+					editable={{
+						onRowAdd: (newData) =>
+							new Promise((resolve) => {
+								setTimeout(() => {
+									resolve();
+									setState((prevState) => {
+										const data = [ ...prevState.data ];
+										data.push(newData);
+										return { ...prevState, data };
+									});
+								}, 600);
+							}),
+						onRowUpdate: (newData, oldData) =>
+							new Promise((resolve) => {
+								setTimeout(() => {
+									resolve();
+									if (oldData) {
+										setState((prevState) => {
 											const data = [ ...prevState.data ];
-											data.push(newData);
+											data[data.indexOf(oldData)] = newData;
 											return { ...prevState, data };
 										});
-									}, 600);
-								}),
-							onRowUpdate: (newData, oldData) =>
-								new Promise((resolve) => {
-									setTimeout(() => {
-										resolve();
-										if (oldData) {
-											this.setState((prevState) => {
-												const data = [ ...prevState.data ];
-												data[data.indexOf(oldData)] = newData;
-												return { ...prevState, data };
-											});
-										}
-									}, 600);
-								}),
-							onRowDelete: (oldData) =>
-								new Promise((resolve) => {
-									setTimeout(() => {
-										resolve();
-										this.setState((prevState) => {
-											const data = [ ...prevState.data ];
-											data.splice(data.indexOf(oldData), 1);
-											return { ...prevState, data };
-										});
-									}, 600);
-								})
-						}}
-					/>
-				</div>
-			);
-		}
-	}
+									}
+								}, 600);
+							}),
+						onRowDelete: (oldData) =>
+							new Promise((resolve) => {
+								setTimeout(() => {
+									resolve();
+									setState((prevState) => {
+										const data = [ ...prevState.data ];
+										data.splice(data.indexOf(oldData), 1);
+										return { ...prevState, data };
+									});
+								}, 600);
+							})
+					}}
+				/>
+			}
+		</>
+	);
 }
-
-export default MainTable;

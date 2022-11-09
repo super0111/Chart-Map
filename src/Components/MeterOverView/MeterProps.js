@@ -1,15 +1,8 @@
-import React, { Component } from 'react';
-import Dashboard from './Dashboard';
+import React from 'react';
 
-export class MeterProps extends Component {
-	componentDidMount = () => {};
-
-	state = {
-		activityMeter: []
-	};
-	render() {
-		return <Dashboard />;
-	}
+export default function MeterProp() {
+	return <div>
+		
+	</div>;
 }
 
-export default MeterProps;

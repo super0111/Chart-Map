@@ -75,7 +75,7 @@ function renderGanttItem(params, api) {
 }
 
 function renderAxisLabelItem(params, api) {
-	console.log(api);
+
 	var y = api.coord([0, api.value(0)])[1];
     if (y < params.coordSys.y + 5) {
         return;

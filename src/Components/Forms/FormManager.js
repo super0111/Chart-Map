@@ -88,14 +88,14 @@ export default function FormManager() {
 				<div>
 					{activeStep === steps.length ? (
 						<div>
-							<Typography>
+							<Typography component={'div'}>
 								All steps completed
 							</Typography>
 							<Button onClick={handleReset}>Reset</Button>
 						</div>
 					) : (
 						<div>
-							<Typography>
+							<Typography component={'div'}>
 								{getStepContent(activeStep)}
 							</Typography>
 							<Box sx={{

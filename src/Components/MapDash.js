@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 
 import MuiDrawer from '@mui/material/Drawer';
-import { Container, List, Divider, IconButton } from '@mui/material';
+import { Container, Box, List, Divider, IconButton } from '@mui/material';
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -11,6 +11,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { mainListItems } from './listItems';
 import MapRouting from './MapRouting';
+import { Context } from '../Context/AppContext';
 
 const drawerWidth = 240;
 
@@ -61,26 +62,33 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MapDash() {
-  const [open, setOpen] = React.useState(true);
+  const { drawOpen, setDrawOpen } = useContext(Context)
   const matches = useMediaQuery('(min-width:685px)');
 
   useEffect(() => {
-    setOpen(matches);
+    setDrawOpen(matches);
   }, [matches])
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setDrawOpen(true);
+
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setDrawOpen(false);
   };
 
 	return (
-		<div id="left-sidebar" style={{padding: "20px 0px 20px 240px"}}>
+		<Box id="left-sidebar" sx={
+      drawOpen === true ?{
+        padding: "20px 0px 20px 240px"
+      } :
+      {
+      padding: "20px 0px 20px 60px"
+    }}>
       <Drawer 
         variant="permanent" 
-        open={open}
+        open={drawOpen}
         sx={{
           "& .MuiPaper-root": {
             backgroundColor: "white",
@@ -95,7 +103,7 @@ export default function MapDash() {
           }}
         >
           {
-						open === false ?
+						drawOpen === false ?
 						<IconButton sx={{marginRight: "10px"}} className='draw_icon' onClick={handleDrawerOpen}>
 							<ChevronRightIcon className=''/>
 						</IconButton> : 
@@ -115,6 +123,6 @@ export default function MapDash() {
 					<MapRouting />
 				</Container>
 			</main>
-		</div>
+		</Box>
 	);
 }

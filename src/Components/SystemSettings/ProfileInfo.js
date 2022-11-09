@@ -32,7 +32,13 @@ export default function ProfileInfo() {
 
 	return (
 		<div>
-			<Paper>
+			<Paper sx={{
+				width: "800px",
+				marginLeft: "auto",
+				marginRight: "auto",
+				marginTop: "70px",
+				padding: "24px",
+			}}>
 				<TextField id='outlined-basic' label='Usernmae' variant='outlined' style={{ margin: 8 }} fullWidth />
 				<TextField id='outlined-basic' label='Full Name' variant='outlined' style={{ margin: 8 }} fullWidth />
 				<TextField id='outlined-basic' label='Telephone' variant='outlined' style={{ margin: 8 }} fullWidth />
@@ -51,10 +57,15 @@ export default function ProfileInfo() {
 					<option value={10}>Administrator</option>
 					<option value={20}>Client</option>
 				</Select>
-				<Button variant='contained' color='primary' onClick={handleBack}>
+				<Button variant='contained' color='primary' onClick={handleBack} sx={{
+					backgroundColor: "#3f51b5",
+				}}>
 					Save
 				</Button>
-				<Button variant='contained' color='primary' onClick={handleBack}>
+				<Button variant='contained' color='primary' onClick={handleBack} sx={{
+					backgroundColor: "#3f51b5",
+					marginLeft: "20px",
+				}}>
 					Cancel
 				</Button>
 			</Paper>

@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow, Polyline } from 'react-google-maps';
 
 import Container from '@mui/material/Container';
@@ -132,25 +132,21 @@ function Map() {
 }
 
 const WrappedMap = withScriptjs(withGoogleMap(Map));
-export class MapLocation extends Component {
-	render() {
-		return (
-			<main>
-				<Container>
-					<div>
-						<WrappedMap
-							googleMapURL={
-								'https://maps.googleapis.com/maps/api/js?key=AIzaSyAX7CGyLu3H3AfDxa6-YOhGInraceFUiow&callback=initMap'
-							}
-							loadingElement={<div style={{ height: `100%` }} />}
-							containerElement={<div style={{ height: `95vh` }} />}
-							mapElement={<div style={{ height: `58vh` }} />}
-						/>
-					</div>
-				</Container>
-			</main>
-		);
-	}
+export default function MapLocation() {
+	return (
+		<main>
+			<Container>
+				<div>
+					<WrappedMap
+						googleMapURL={
+							'https://maps.googleapis.com/maps/api/js?key=AIzaSyAX7CGyLu3H3AfDxa6-YOhGInraceFUiow&callback=initMap'
+						}
+						loadingElement={<div style={{ height: `100%` }} />}
+						containerElement={<div style={{ height: `95vh` }} />}
+						mapElement={<div style={{ height: `58vh` }} />}
+					/>
+				</div>
+			</Container>
+		</main>
+	);
 }
-
-export default MapLocation;

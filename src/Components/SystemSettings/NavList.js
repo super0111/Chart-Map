@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ListItem, ListItemIcon, ListItemText, DashboardIcon } from '@mui/material';
+import { ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import LayersIcon from '@mui/icons-material/Layers';
 
 export const mainListItems = (

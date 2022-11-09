@@ -1,63 +1,18 @@
-import React, { Component, useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow, Polyline } from 'react-google-maps';
 import isInside from 'point-in-polygon';
 import MaterialTable from 'material-table';
 
-import { Switch } from '@mui/material';
+// import MuiDrawer from '@mui/material/Drawer';
+import Drawer from '@mui/material/Drawer';
+
+import { Switch, Box } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
+import { ThemeProvider, createTheme } from '@mui/material';
 import MapCard from './MapCard';
 import './home.css';
-
-
-const useStyles = makeStyles((theme)=>({
-
-	toolbarIcon: {
-		alignItems: 'center',
-		justifyContent: 'flex-end',
-		padding: 0,
-		marginLeft: -10,
-		...theme.mixins.toolbar
-	},
-	drawerPaper: {
-		position: 'relative',
-		'::-webkit-scrollbar': {
-			width: '1em'
-		},
-		padding: '8px 15px',
-		marginLeft: 5,
-		marginRight: 40,
-		borderLeft: 0,
-		whiteSpace: 'nowrap',
-		height: 'calc(100vh - 280px)',
-		transition: theme.transitions.create('width', {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.enteringScreen
-		})
-	},
-	drawerPaperClose: {
-		overflowX: 'hidden',
-		transition: theme.transitions.create('width', {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen
-		}),
-		width: 30,
-		[theme.breakpoints.up('sm')]: {
-			width: 30
-		}
-	},
-	NotificationTable: {
-		position: 'absolute',
-		left: 240,
-		right: 0,
-		bottom: 0,
-		height: 200,
-		padding: '0px 25px',
-		transition: '0.3s'
-	}
-}));
 
 const { MarkerClusterer} = require('react-google-maps/lib/components/addons/MarkerClusterer');
 const { DrawingManager } = require("react-google-maps/lib/components/drawing/DrawingManager");
@@ -141,7 +96,7 @@ const getMeterByNumber = (number, meterData) => {
 }
 
 function Map(props) {
-	const classes = useStyles();
+	const defaultMaterialTheme = createTheme()
 	const url = 'https://cors-anywhere.herokuapp.com/https://gridxmeters.com/MeterInfo2.php';
 	const { meterData } = useFetch(url);
 	const [ selectedMeter, setSelectedMeter ] = useState(null);
@@ -154,6 +109,7 @@ function Map(props) {
 	const [ loadFlag, setLoadFlag ] = useState(true);
 	const [open, setOpen] = useState(true);
 	const [selectedNotification, setSelectedNotification] = useState('');
+
 	if(loadFlag &&  meterData != null){
 		let meter = getMeterByNumber(props.selectedMeterNumber, meterData);
 		setSelectedMeter(meter);
@@ -342,30 +298,51 @@ function Map(props) {
 			<Drawer
 				anchor='right'
 				variant='permanent'
-				classes={{
-					paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+				sx={{
+					"& .MuiDrawer-paper": {
+						position: 'relative',
+						'::-webkit-scrollbar': {
+							width: '1em'
+						},
+						padding: '8px 15px',
+						borderLeft: 0,
+						whiteSpace: 'nowrap',
+						height: 'calc(100vh - 200px)',
+					}
 				}}
-				open={open}>
-				<MaterialTable
-					key={"weekly"}
-					className={makeStyles.root}
-					title='Meter Weekly Power Consumption'
-					onRowClick={handleRowClick1}
-					options={{
-						headerStyle: {minHeight: 32},
-						pageSize: 50,
-						pageSizeOptions: [20, 50, 100],
-					}}
-					// onRowClick={this.handleRowClick}
-					columns={[
-						{ title: 'UserName', field: 'UserName', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'} },
-						{ title: 'Meter Number', field: 'MeterNumber', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
-						{ title: 'Total Power', field: 'TotalPower', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
-						{ title: 'Alarms', field: 'Alarms', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  }
-					]}
-					data={(selectedMeterData? selectedMeterData : (meterData?meterData:[]))}
-				/>
-				
+				open={open}
+			>
+				<ThemeProvider theme={defaultMaterialTheme}>
+					<MaterialTable
+						key={"weekly"}
+						title='Meter Weekly Power Consumption'
+						onRowClick={handleRowClick1}
+						options={{
+							// headerStyle: {minHeight: 32},
+							headerStyle: {
+								whiteSpace: "nowrap",
+								height: "20px",
+								maxHeight: "20px",
+								padding: 0
+						},
+						rowStyle: {
+								height: "20px",
+								maxHeight: "20px",
+								padding: 0
+						},
+							pageSize: 50,
+							pageSizeOptions: [20, 50, 100],
+						}}
+						// onRowClick={handleRowClick}
+						columns={[
+							{ title: 'UserName', field: 'UserName', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'} },
+							{ title: 'Meter Number', field: 'MeterNumber', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
+							{ title: 'Total Power', field: 'TotalPower', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
+							{ title: 'Alarms', field: 'Alarms', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  }
+						]}
+						data={(selectedMeterData? selectedMeterData : (meterData?meterData:[]))}
+					/>
+				</ThemeProvider>
 			</Drawer>
 			{ selectedMeterData && selectedMeterData.length > 0 && (
 				<GoogleMap
@@ -881,22 +858,34 @@ function Map(props) {
 					)} */}
 				</GoogleMap>
 			)}
-			<div className={classes.NotificationTable} id="bottom-table">
-				<MaterialTable
-					title='Alarms Notification'
-					headerStyle={{minHeight: 32}}
-					onRowClick={handleRowClick2}
-					columns={[
-						{ title: 'Meter Number ', field: 'MeterNumber', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'} },
-						{ title: 'Location', field: 'Location', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
-						{ title: 'Date/ Time', field: 'Date_time', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
-						{ title: 'Alarm Type', field: 'AlarmType', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
-						{ title: ' Alarm Code', field: 'AlarmCode', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
-						{ title: 'Duration (Hours)', field: 'Duration', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  }
-					]}
-					data={selectedMeterData?(selectedNotification!=''?selectedMeterData.filter(meter => meter.AlarmType == selectedNotification):selectedMeterData):(meterData?meterData:[])}
-				/>
-			</div>
+
+
+			<Box id="bottom-table" sx={{
+				position: 'absolute',
+				left: 239,
+				right: 0,
+				bottom: -95,
+				height: 200,
+				padding: '0px 25px',
+				transition: '0.3s'
+			}}>
+				<ThemeProvider theme={defaultMaterialTheme}>
+					<MaterialTable
+						title='Alarms Notification'
+						headerStyle={{minHeight: 32}}
+						onRowClick={handleRowClick2}
+						columns={[
+							{ title: 'Meter Number ', field: 'MeterNumber', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'} },
+							{ title: 'Location', field: 'Location', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
+							{ title: 'Date/ Time', field: 'Date_time', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
+							{ title: 'Alarm Type', field: 'AlarmType', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
+							{ title: ' Alarm Code', field: 'AlarmCode', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  },
+							{ title: 'Duration (Hours)', field: 'Duration', cellStyle: {padding: '3px 8px'}, headerStyle: {padding: '3px 8px'}  }
+						]}
+						data={selectedMeterData?(selectedNotification!=''?selectedMeterData.filter(meter => meter.AlarmType == selectedNotification):selectedMeterData):(meterData?meterData:[])}
+					/>
+				</ThemeProvider>
+			</Box>
 			<div id="toggler" onClick={toggleDown}>
 				<ChevronLeftIcon/>
 			</div>
@@ -914,39 +903,36 @@ function Map(props) {
 }
 
 const WrappedMap = withScriptjs(withGoogleMap(Map));
-export class Home extends Component {
-	render() {
-		if (!this.props.location.state){
-			return (
-				<div key={"google_map"} style={{marginRight:-58}}>
+
+export default function Home() {
+	const { location } = useLocation();
+	let selectedMeterNumber = location?.state?.meterNumber;
+	return (
+		<>
+			{
+				!location?.state ?
+				<div key={"google_map"}>
 					<WrappedMap
 						googleMapURL={
 							'https://maps.googleapis.com/maps/api/js?key=AIzaSyAX7CGyLu3H3AfDxa6-YOhGInraceFUiow&v=3.exp&libraries=geometry,drawing,places'
 						}
 						loadingElement={<div style={{height: `100%`, width: '100%'}}/>}
 						containerElement={<div style={{height: `calc(100vh - 80px)`, width: '100%', display:'flex'}}/>}
-						mapElement={<div style={{height: `calc(100% - 200px)`, width: '100%'}}/>}
+						mapElement={<div style={{height: `calc(100vh - 200px)`, width: '100%'}}/>}
 					/>
-				</div>
-			);
-		}
-		else {
-			let selectedMeterNumber = this.props.location.state.meterNumber;
-			return (
-				<div key={"google_map"} style={{marginRight:-58}}>
+				</div> :
+				<div key={"google_map"}>
 					<WrappedMap selectedMeterNumber={selectedMeterNumber}
 						googleMapURL={
 							'https://maps.googleapis.com/maps/api/js?key=AIzaSyAX7CGyLu3H3AfDxa6-YOhGInraceFUiow&v=3.exp&libraries=geometry,drawing,places'
 						}
 						loadingElement={<div style={{height: `100%`, width: '100%'}}/>}
 						containerElement={<div style={{height: `calc(100vh - 80px)`, width: '100%', display:'flex'}}/>}
-						mapElement={<div style={{height: `calc(100% - 200px)`, width: '100%'}}/>}
+						mapElement={<div style={{height: `calc(100vh - 200px)`, width: '100%'}}/>}
 					/>
 					<div id="bottom-table"></div>
 				</div>
-			);
-		}
-	}
+			}
+		</>
+	);
 }
-
-export default Home;

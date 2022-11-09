@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router';
 import MeterGrid from './MeterGrid';
 
-export class MeterAnalyse extends Component {
-	state = {
-		meterData: this.props.location.state.meters
+export default function MeterAnalyse() {
+	const { location } = useLocation();
+	const state = {
+		meterData: location.state.meters
 	};
 
-	render() {
-		return (
-			<div>
-				<MeterGrid meters={this.state.meterData} />
-			</div>
-		);
-	}
+	return (
+		<div>
+			<MeterGrid meters={state.meterData} />
+		</div>
+	);
 }
-
-export default MeterAnalyse;

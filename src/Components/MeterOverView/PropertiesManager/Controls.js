@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class Controls extends Component {
-	render() {
-		return (
-			<div>
-				<h1> Controls</h1>
-			</div>
-		);
-	}
+export default function Controls() {
+	return (
+		<div>
+			<h1> Controls</h1>
+		</div>
+	);
 }
-
-export default Controls;

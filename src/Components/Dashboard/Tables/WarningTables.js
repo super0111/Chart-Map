@@ -119,8 +119,10 @@ export default function WarningTables() {
 				count={rows.length}
 				rowsPerPage={rowsPerPage}
 				page={page}
-				onChangePage={handleChangePage}
-				onChangeRowsPerPage={handleChangeRowsPerPage}
+				onPageChange={handleChangePage}
+				onRowsPerPageChange={handleChangeRowsPerPage}
+				// onPageChange={() => console.log('handle page change')}
+				// onRowsPerPageChange={handleChangeRowsPerPage}
 			/>
 		</Card>
 	);

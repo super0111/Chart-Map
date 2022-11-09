@@ -32,7 +32,13 @@ export default function Password() {
 
 	return (
 		<div>
-			<Paper>
+			<Paper sx={{
+				width: "800px",
+				marginLeft: "auto",
+				marginRight: "auto",
+				marginTop: "70px",
+				padding: "24px",
+			}}>
 				<TextField
 					id='outlined-basic'
 					label='Old Password'
@@ -54,10 +60,15 @@ export default function Password() {
 					style={{ margin: 8 }}
 					fullWidth
 				/>
-				<Button variant='contained' color='primary' onClick={handleBack}>
+				<Button variant='contained' color='primary' onClick={handleBack} sx={{
+					backgroundColor: "#3f51b5",
+				}}>
 					Save
 				</Button>
-				<Button variant='contained' color='primary' onClick={handleBack}>
+				<Button variant='contained' color='primary' onClick={handleBack} sx={{
+					backgroundColor: "#3f51b5",
+					marginLeft: "20px",
+				}}>
 					Cancel
 				</Button>
 			</Paper>
