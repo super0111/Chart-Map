@@ -5,11 +5,11 @@ import { Grid } from '@mui/material';
 import UserToolbar from './Table/UserToolbar';
 import MapIcon from '@mui/icons-material/Map';
 
-import { ThemeProvider, createTheme } from '@mui/material'
+import { ThemeProvider, createTheme } from '@mui/material';
 
 export default function MainTable() {
 
-	const defaultMaterialTheme = createTheme()
+	const defaultMaterialTheme = createTheme();
 
 	let history = useHistory();
 	const [ stateValue, setState ] = useState({
@@ -32,24 +32,42 @@ export default function MainTable() {
 	});
 	
 	useEffect(()=>{
-		var meterRequest = {
-			key: 'StartGRID2020',
-			SQLQuery: 'SELECT * FROM UserDetails '
-		};
-
 		const fetchPosts = async () => {
-			const request = new Request('https://cors-anywhere.herokuapp.com/https://stargridx.net/GetUserProfile.php', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(meterRequest)
+			const request = new Request('http://gridx-meter-server-node-dev.us-east-1.elasticbeanstalk.com/meterProfile/getAll', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXRlckRSTiI6IjAwMDAwMzk5NjczNTEiLCJpYXQiOjE2NjMyOTE2NTl9.Q-5Sf02eatwT8UEHajmIBcdAuu1PmKsWrXQNU_oVGDI'
+				}
 			});
 
 			const api_call = await fetch(request);
 			const data = await api_call.json();
+			console.log("datatatatat", data)
 			setState({ meterData: data.Server_response });
 		}
 		fetchPosts();
 	}, [stateValue])
+
+	// useEffect(()=>{
+	// 	var meterRequest = {
+	// 		key: 'StartGRID2020',
+	// 		SQLQuery: 'SELECT * FROM UserDetails '
+	// 	};
+
+	// 	const fetchPosts = async () => {
+	// 		const request = new Request('https://cors-anywhere.herokuapp.com/https://stargridx.net/GetUserProfile.php', {
+	// 			method: 'POST',
+	// 			headers: { 'Content-Type': 'application/json' },
+	// 			body: JSON.stringify(meterRequest)
+	// 		});
+
+	// 		const api_call = await fetch(request);
+	// 		const data = await api_call.json();
+	// 		setState({ meterData: data.Server_response });
+	// 	}
+	// 	fetchPosts();
+	// }, [stateValue])
 
 	const handleMapIconClick = (event, rowData) => {
 		if(rowData['ID'] != null){
@@ -132,70 +150,70 @@ export default function MainTable() {
 									}
 								]}
 							/>
-						</ThemeProvider>
-						
+						</ThemeProvider>			
 					</Grid>
 				</Grid>
 				:
-				<MaterialTable
-					columns={[
-						{ title: "Adı", field: "name" },
-						{ title: "Soyadı", field: "surname" },
-						{ title: "Doğum Yılı", field: "birthYear", type: "numeric" },
-						{
-							title: "Doğum Yeri",
-							field: "birthCity",
-							lookup: { 34: "İstanbul", 63: "Şanlıurfa" },
-						},
-					]}
-					data={[
-						{
-							name: "Mehmet",
-							surname: "Baran",
-							birthYear: 1987,
-							birthCity: 63,
-						},
-					]}
-					title="Demo Title"
-					onPageChange={()=>console.log('ddddfff')}
-					editable={{
-						onRowAdd: (newData) =>
-							new Promise((resolve) => {
-								setTimeout(() => {
-									resolve();
-									setState((prevState) => {
-										const data = [ ...prevState.data ];
-										data.push(newData);
-										return { ...prevState, data };
-									});
-								}, 600);
-							}),
-						onRowUpdate: (newData, oldData) =>
-							new Promise((resolve) => {
-								setTimeout(() => {
-									resolve();
-									if (oldData) {
+				<ThemeProvider theme={defaultMaterialTheme}>
+					<MaterialTable
+						columns={[
+							{ title: "Adı", field: "name" },
+							{ title: "Soyadı", field: "surname" },
+							{ title: "Doğum Yılı", field: "birthYear", type: "numeric" },
+							{
+								title: "Doğum Yeri",
+								field: "birthCity",
+								lookup: { 34: "İstanbul", 63: "Şanlıurfa" },
+							},
+						]}
+						data={[
+							{
+								name: "Mehmet",
+								surname: "Baran",
+								birthYear: 1987,
+								birthCity: 63,
+							},
+						]}
+						title="Demo Title"
+						editable={{
+							onRowAdd: (newData) =>
+								new Promise((resolve) => {
+									setTimeout(() => {
+										resolve();
 										setState((prevState) => {
 											const data = [ ...prevState.data ];
-											data[data.indexOf(oldData)] = newData;
+											data.push(newData);
 											return { ...prevState, data };
 										});
-									}
-								}, 600);
-							}),
-						onRowDelete: (oldData) =>
-							new Promise((resolve) => {
-								setTimeout(() => {
-									resolve();
-									setState((prevState) => {
-										const data = [ ...prevState.data ];
-										data.splice(data.indexOf(oldData), 1);
-										return { ...prevState, data };
-									});
-								}, 600);
-							})
-					}}
-				/>
+									}, 600);
+								}),
+							onRowUpdate: (newData, oldData) =>
+								new Promise((resolve) => {
+									setTimeout(() => {
+										resolve();
+										if (oldData) {
+											setState((prevState) => {
+												const data = [ ...prevState.data ];
+												data[data.indexOf(oldData)] = newData;
+												return { ...prevState, data };
+											});
+										}
+									}, 600);
+								}),
+							onRowDelete: (oldData) =>
+								new Promise((resolve) => {
+									setTimeout(() => {
+										resolve();
+										setState((prevState) => {
+											const data = [ ...prevState.data ];
+											data.splice(data.indexOf(oldData), 1);
+											return { ...prevState, data };
+										});
+									}, 600);
+								})
+						}}
+					/>
+				</ThemeProvider>
 			}
 		</>
 	);
