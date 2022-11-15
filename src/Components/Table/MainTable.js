@@ -27,8 +27,6 @@ export default function MainTable() {
 	});
 
 	useEffect( ()=> {
-		
-		//console.log(JSON.stringify(meterRequest));
 		const fetchPosts = async () => {
 			const request = new Request('http://gridx-meter-server-node-dev.us-east-1.elasticbeanstalk.com/meterProfile/getAll', {
 				method: 'GET',
@@ -43,7 +41,6 @@ export default function MainTable() {
 			setState({ meterData: data});
 		}
 		fetchPosts();
-		// console.log(JSON.stringify(data));
 	}, [])
 
 	const handleMapIconClick = (event, rowData) => {
