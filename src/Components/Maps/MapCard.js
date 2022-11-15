@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography } from '@mui/material';
 import AreaCharts from './AreaPlot/AreaChart';
 
-export default function MediaCard(props) {
+export default function MapCard(props) {
 
 	return (
 		<Card sx={{	maxWidth: 545 }}>
@@ -19,7 +19,7 @@ export default function MediaCard(props) {
 				<Button size='small' color='primary'>
 					<Link
 						to={{
-							pathname: `/MeterProps/${props.MeterProfile.MeterNumber}`,
+							pathname: `/MapDash/Analyse`,
 							state: { meter: props.MeterProfile }
 						}}>
 						Meter Profile

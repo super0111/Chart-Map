@@ -8,6 +8,7 @@ import MeterAnalysis from './MeterAnalysis';
 import MainTable from './Table/MainTable';
 import HomeMaps from './Maps/HomeMaps';
 import MeterLog from './Dashboard/EChartBlocks/MeterLog';
+import DataOverview from './MeterOverView/PropertiesManager/DataOverview';
 
 const MapRouting = () => (
 	<Switch>
@@ -16,8 +17,8 @@ const MapRouting = () => (
 		<Route exact path='/MapDash/Home2' component={Home} />
 		<Route exact path='/MapDash/Dashboard' component={Dashboard} />
 		<Route exact path='/MapDash/MeterLog' component={MeterLog} />
-		<Route exact path='/MapDash/Analyse' component={MeterAnalyse} />
-		<Route exact path='/MapDash/Analysis' component={MeterAnalysis} />
+		<Route exact path='/MapDash/Analyse' component={DataOverview} />
+		<Route exact path='/MapDash/Analysis' component={DataOverview} />
 	</Switch>
 );
 export default MapRouting;

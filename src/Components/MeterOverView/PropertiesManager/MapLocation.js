@@ -6,7 +6,7 @@ const { DrawingManager } = require("react-google-maps/lib/components/drawing/Dra
 
 const useFetch = (url) => {
 	const [ meterData, setMeterdata ] = useState(null);
-
+	console.log('data.Server_response');
 	useEffect(() => {
 		async function fetchData() {
 			var resquestType = {

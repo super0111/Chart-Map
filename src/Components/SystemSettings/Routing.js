@@ -11,6 +11,7 @@ const Routing = () => (
 		<Route path='/SystemSetting/Trarrif' component={Trarrif} />
 		<Route path='/SystemSetting/UserManagment' component={UserManagment} />
 		<Route path='/SystemSetting/Password' component={Password} />
+		
 		<Route path='/SystemSetting/ProfileInfo' component={ProfileInfo} />
 	</Switch>
 );

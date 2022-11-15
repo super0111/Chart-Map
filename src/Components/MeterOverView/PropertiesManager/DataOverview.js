@@ -21,7 +21,8 @@ function DataOverview(props) {
 				{/* Chart */}
 				<Grid item lg={12} md={12} xl={12} xs={12}>
 					<Paper elevation={0}>
-						<MeterInformation selectedMeter={props.location.state} />
+					
+						
 					</Paper>
 				</Grid>
 				{/* Recent Deposits md={4} lg={3}*/}

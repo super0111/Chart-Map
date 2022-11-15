@@ -38,34 +38,35 @@ const useFetch = (url) => {
 				key: 'StartGRID2020',
 				SQLQuery: `SELECT * FROM  MeterLocation`
 			};
-			const request = new Request(`https://gridxmeters.com/MeterGeolocation.php`, {
-				method: 'POST',
-				headers: { 'Content-type': 'application/json' },
-				body: JSON.stringify(resquestType)
+			const request = new Request(`http://gridx-meter-server-node-dev.us-east-1.elasticbeanstalk.com/meterLocation/getAll`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXRlckRSTiI6IjAwMDAwMzk5NjczNTEiLCJpYXQiOjE2NjMyOTE2NTl9.Q-5Sf02eatwT8UEHajmIBcdAuu1PmKsWrXQNU_oVGDI'
+				}
 			});
 			const api_call = await fetch(request);
 			const data = await api_call.json();
-			var meterRequest = {
-				key: 'StartGRID2020',
-				SQLQuery: 'SELECT * FROM MeterNotification '
-			};
-			//console.log(JSON.stringify(meterRequest));
-			const request1 = new Request('https://cors-anywhere.herokuapp.com/https://gridxmeters.com/GetMeterNofications.php', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(meterRequest)
+			
+			console.log(JSON.stringify(data));
+			const request1 = new Request('http://gridx-meter-server-node-dev.us-east-1.elasticbeanstalk.com/meterNotification/getAll', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXRlckRSTiI6IjAwMDAwMzk5NjczNTEiLCJpYXQiOjE2NjMyOTE2NTl9.Q-5Sf02eatwT8UEHajmIBcdAuu1PmKsWrXQNU_oVGDI'
+				}
 			});
 			const api_call1 = await fetch(request1);
 			const data1 = await api_call1.json();
 			// console.log(data1.Server_response, data.Server_response);
 			let data2 = Array();
-			for (let i = 0 ; i < data.Server_response.length ; i++){
+			for (let i = 0 ; i < data.length ; i++){
 				let res = Array();
-				let tmp1 = data.Server_response[i];
+				let tmp1 = data[i];
 				tmp1 = { ...tmp1, TotalPower:125, Alarms:120}
 				let j;
-				for (j = 0 ; j < data1.Server_response.length ; j ++){
-					let tmp2 = data1.Server_response[j];
+				for (j = 0 ; j < data1.length ; j ++){
+					let tmp2 = data1[j];
 					// console.log(tmp1.MeterNumber, tmp2.MeterNumber);
 					if(tmp1.MeterNumber == tmp2.MeterNumber){
 						res = extend({}, tmp1, tmp2);
@@ -73,7 +74,7 @@ const useFetch = (url) => {
 						break;
 					}
 				}
-				if(j == data1.Server_response.length) data2.push(tmp1);
+				if(j == data1.length) data2.push(tmp1);
 			}
 			console.log(data2);
 			// console.log(data.Server_response);
