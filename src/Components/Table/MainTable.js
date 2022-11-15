@@ -2,11 +2,13 @@ import React, { Component, useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import MaterialTable from 'material-table';
 import { Grid } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material';
 import MapIcon from '@mui/icons-material/Map';
 import UserToolbar from './UserToolbar';
 
 export default function MainTable() {
 	let history = useHistory();
+	const defaultMaterialTheme = createTheme();
 	const [ state, setState ] = useState({
 		meterData: [],
 		ColumData: [
@@ -56,10 +58,10 @@ export default function MainTable() {
 	return (
 		<>
 			{state.meterData != null} ?
-			<div>
-				<Grid container direction='column' justify='space-evenly' alignItems='stretch'>
-					<Grid item lg={12} md={10} xl={12} xs={12} sx={{maxWidth: "100% !important"}}>
-						<UserToolbar />
+			<Grid container direction='column' justify='space-evenly' alignItems='stretch'>
+				<Grid item lg={12} md={10} xl={12} xs={12} sx={{maxWidth: "100% !important"}}>
+					<UserToolbar />
+					<ThemeProvider theme={defaultMaterialTheme}>
 						<MaterialTable
 							title='Smart Meters'
 							columns={[
@@ -122,11 +124,11 @@ export default function MainTable() {
 								}
 							]}
 						/>
-					</Grid>
+					</ThemeProvider>
 				</Grid>
-			</div>
+			</Grid>
 			:
-			<div>
+			<ThemeProvider theme={defaultMaterialTheme}>
 				<MaterialTable
 					title='Smart Meters'
 					columns={state.ColumData}
@@ -168,7 +170,7 @@ export default function MainTable() {
 							})
 					}}
 				/>
-			</div>
+			</ThemeProvider>
 		</>
 	);
 }

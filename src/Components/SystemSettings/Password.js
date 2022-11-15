@@ -26,7 +26,6 @@ export default function Password() {
 	};
 
 	const onSubmit = (fields) => {
-		//console.log('Frommanget Fiels:', fields);
 		setUser({ data: [ ...User.data, fields ] });
 	};
 
