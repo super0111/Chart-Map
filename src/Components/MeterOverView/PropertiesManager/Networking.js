@@ -148,7 +148,6 @@ const mainChartOpts = {
 export default function Networking() {
 	return (
 		<Grid container spacing={1}>
-			{/* Chart */}
 			<Grid item xs={12}>
 				<Row>
 					<Col>
