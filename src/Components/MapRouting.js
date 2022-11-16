@@ -12,7 +12,7 @@ import DataOverview from './MeterOverView/PropertiesManager/DataOverview';
 
 const MapRouting = () => (
 	<Switch>
-		<Route exact path='/' component={Dashboard}  />
+		<Route exact path='/' component={Dashboard} />
 		<Route exact path='/MapDash/Grid' component={MainTable} />
 		<Route exact path='/MapDash/Home2' component={Home} />
 		<Route exact path='/MapDash/Dashboard' component={Dashboard} />

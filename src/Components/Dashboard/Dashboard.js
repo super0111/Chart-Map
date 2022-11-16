@@ -15,44 +15,42 @@ import ScatterChart from './EChartBlocks/ScatterChart';
 export default function Dashboard() {
 
 	return (
-		<div>
-			<Grid container spacing={1}>
-				<Grid item lg={3} sm={6} xl={3} xs={12}>
-					<TotalMeters />
-				</Grid>
-				<Grid item lg={3} sm={6} xl={3} xs={12}>
-					<ActiveMeters />
-				</Grid>
-				<Grid item lg={3} sm={6} xl={3} xs={12}>
-					<PowerSummary />
-				</Grid>
-				<Grid item lg={3} sm={6} xl={3} xs={12}>
-					<TotalSystemLoad />
-				</Grid>
-
-				<Grid item lg={6} md={10} xl={6} xs={12}>
-					<Paper>
-						<AreaCharts />
-					</Paper>
-				</Grid>
-
-				<Grid item lg={6} md={10} xl={6} xs={12}>
-					<WarningTables />
-				</Grid>
-
-				<Grid item lg={12} md={12} xl={12} xs={12}>
-					<Paper>
-						<ChartsE />
-					</Paper>
-				</Grid>
-
-				<Grid item lg={12} md={12} xl={12} xs={12}>
-					<Paper style={{marginTop: 20}}>
-						<ScatterChart />
-					</Paper>
-				</Grid>
-
+		<Grid container spacing={1}>
+			<Grid item lg={3} sm={6} xl={3} xs={12}>
+				<TotalMeters />
 			</Grid>
-		</div>
+			<Grid item lg={3} sm={6} xl={3} xs={12}>
+				<ActiveMeters />
+			</Grid>
+			<Grid item lg={3} sm={6} xl={3} xs={12}>
+				<PowerSummary />
+			</Grid>
+			<Grid item lg={3} sm={6} xl={3} xs={12}>
+				<TotalSystemLoad />
+			</Grid>
+
+			<Grid item lg={6} md={10} xl={6} xs={12}>
+				<Paper>
+					<AreaCharts />
+				</Paper>
+			</Grid>
+
+			<Grid item lg={6} md={10} xl={6} xs={12}>
+				<WarningTables />
+			</Grid>
+
+			<Grid item lg={12} md={12} xl={12} xs={12}>
+				<Paper>
+					<ChartsE />
+				</Paper>
+			</Grid>
+
+			<Grid item lg={12} md={12} xl={12} xs={12}>
+				<Paper style={{marginTop: 20}}>
+					<ScatterChart />
+				</Paper>
+			</Grid>
+
+		</Grid>
 	);
 }

@@ -27,7 +27,7 @@ function App() {
 				<Layout>
 					<Header>
 						<HeaderRow className='header-color'>
-							<img src={img2} className='photo' />
+							<img style={{ marginRight: "20px" }} src={img2} className='photo' />
 							<Navigation>
 								<NavLink to='/MapDash/Dashboard' className="header-a" activeClassName="selected"
 								>

@@ -12,6 +12,13 @@ img {
 	height: 220px;
 }
 
+.tab__wrapper .tab_header span {
+	font-size: 16px !important;
+}
+.tab__wrapper .tab_header .tab_close {
+	display: none;
+}
+
 .cluster img{
 	width:100%;
 	height:100%;

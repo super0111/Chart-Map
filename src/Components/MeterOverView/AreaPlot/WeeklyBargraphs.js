@@ -22,6 +22,7 @@ const WeeklyBargraphs = (props) => {
 				title='Area Power Consuption'
 			/>
 			<Divider />
+
 			<CardContent>
 				<div style={{
 					height: 400,
@@ -30,7 +31,9 @@ const WeeklyBargraphs = (props) => {
 					<Bar data={data} options={options} />
 				</div>
 			</CardContent>
+			
 			<Divider />
+
 			<CardActions sx={{
 				justifyContent: 'flex-end'
 			}}>

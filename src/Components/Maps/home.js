@@ -48,7 +48,6 @@ const useFetch = (url) => {
 			const api_call = await fetch(request);
 			const data = await api_call.json();
 			
-			console.log(JSON.stringify(data));
 			const request1 = new Request('http://gridx-meter-server-node-dev.us-east-1.elasticbeanstalk.com/meterNotification/getAll', {
 				method: 'GET',
 				headers: {
@@ -58,7 +57,6 @@ const useFetch = (url) => {
 			});
 			const api_call1 = await fetch(request1);
 			const data1 = await api_call1.json();
-			// console.log(data1.Server_response, data.Server_response);
 			let data2 = Array();
 			for (let i = 0 ; i < data.length ; i++){
 				let res = Array();
@@ -67,7 +65,6 @@ const useFetch = (url) => {
 				let j;
 				for (j = 0 ; j < data1.length ; j ++){
 					let tmp2 = data1[j];
-					// console.log(tmp1.MeterNumber, tmp2.MeterNumber);
 					if(tmp1.MeterNumber == tmp2.MeterNumber){
 						res = extend({}, tmp1, tmp2);
 						data2.push(res);
@@ -76,8 +73,6 @@ const useFetch = (url) => {
 				}
 				if(j == data1.length) data2.push(tmp1);
 			}
-			console.log(data2);
-			// console.log(data.Server_response);
 			setMeterData(data2);
 		}
 		fetchData();
