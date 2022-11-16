@@ -3,17 +3,8 @@ import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './home.css';
 
-const data = [
-	[ '2000-06-05', 116 ],
-	[ '2000-06-06', 129 ],
-	[ '2000-06-07', 135 ],
-	[ '2000-06-08', 86 ],
-	[ '2000-06-09', 73 ],
-	[ '2000-06-10', 85 ],
-];
-
 export const Voltage = (props) => {
-	// const data = props.voltageValues;
+	const data = props.valtageValues;
 	return (
 		<div className={'echarts-new'}>
 			<ReactEcharts
@@ -28,7 +19,7 @@ export const Voltage = (props) => {
 						trigger: 'axis'
 					},
 					xAxis: {
-						data: data.map(function(item) {
+						data: data?.map(function(item) {
 							return item[0];
 						})
 					},
@@ -86,7 +77,7 @@ export const Voltage = (props) => {
 					series: {
 						name: 'Meter',
 						type: 'line',
-						data: data.map(function(item) {
+						data: data?.map(function(item) {
 							return item[1];
 						}),
 						markLine: {

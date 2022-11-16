@@ -19,7 +19,12 @@ function MeterData() {
 	// const [ state, setState ] = useState([]);
 	const [ state, setState ] = useState({
     valtageValues: [],
-
+    currentValues: [],
+    frequencyValues: [],
+    active_powerValues: [],
+    reactive_powerValues: [],
+    apparent_powerValues: [],
+    power_factorValues: [],
   });
 
   useEffect( ()=> {
@@ -33,50 +38,75 @@ function MeterData() {
 			});
 	
 			const api_call = await fetch(request);
-			const data = await api_call.json();
-      console.log("datat vaaaalueee", data)
+			let data = await api_call.json();
+      console.log("originalllll dataa", data)
+      const voltage_data = data.map((item) => {
+        const time = new Date(item.record_time);
+        const recodeTime = Moment(time).format('YYYY-MM-DD').toString();
+        return [recodeTime, item.voltage]
+      });
+      const current_data = data.map((item) => {
+        const time = new Date(item.record_time);
+        const recodeTime = Moment(time).format('YYYY-MM-DD').toString();
+        return [recodeTime, item.current]
+      });
+      const frequency_data = data.map((item) => {
+        const time = new Date(item.record_time);
+        const recodeTime = Moment(time).format('YYYY-MM-DD').toString();
+        return [recodeTime, item.frequency]
+      });
+      const reactive_power_data = data.map((item) => {
+        const time = new Date(item.record_time);
+        const recodeTime = Moment(time).format('YYYY-MM-DD').toString();
+        return [recodeTime, item.reactive_power]
+      });
+      const active_power_data = data.map((item) => {
+        const time = new Date(item.record_time);
+        const recodeTime = Moment(time).format('YYYY-MM-DD').toString();
+        return [recodeTime, item.active_power]
+      });
+      const apparent_power_data = data.map((item) => {
+        const time = new Date(item.record_time);
+        const recodeTime = Moment(time).format('YYYY-MM-DD').toString();
+        return [recodeTime, item.apparent_power]
+      });
+      const power_factor_data = data.map((item) => {
+        const time = new Date(item.record_time);
+        const recodeTime = Moment(time).format('YYYY-MM-DD').toString();
+        return [recodeTime, item.power_factor]
+      });
 
-      for(let i=0; i<= data.length; i++) {
-        let datas = [];
-        console.log(" data[i].voltage",  data[i].voltage)
-        console.log(" data[i].record_time",  data[i].record_time)
-        const time = new Date(data[i].record_time);
-        const recodeTime = Moment(time).format('YYYY-MM-DD')
-        console.log("recodeTime", recodeTime.toString());
-
-
-        datas.push(...datas, data[i].voltage);  
-        // setState({ valtageValues: datas });
-      console.log("dataaaaaa", datas)
-
-      }
-
-			setState(...state, data);
+			setState({
+        valtageValues: voltage_data,
+        currentValues: current_data,
+        frequencyValues: frequency_data,
+        active_powerValues: active_power_data,
+        reactive_powerValues: reactive_power_data,
+        apparent_powerValues: apparent_power_data,
+        power_factorValues: power_factor_data,
+      });
 		}
 		fetchPosts();
 	}, [])
 
-  console.log("statatate", state.valtageValues)
-
-
-  
-
   return (
     <Grid container spacing={3}>
       {/* Chart */}
-      <Grid item lg={12} md={12} xl={12} xs={12}>
+      {/* <Grid item lg={12} md={12} xl={12} xs={12}>
         <Paper elevation={0}>
           
         </Paper>
-      </Grid>
+      </Grid> */}
       {/* Recent Deposits md={4} lg={3}*/}
-      <Grid item lg={8} md={12} xl={9} xs={12}>
+      <Grid item lg={7} md={12} xl={8} xs={12}>
         <Paper elevation={0}>
           <WeeklyBargraphs />
         </Paper>
       </Grid>
       {/* Recent Deposits md={4} lg={3}*/}
-      <Grid item lg={4} md={6} xl={3} xs={12}>
+      <Grid item lg={5} md={6} xl={4} xs={12} sx={{
+        paddingLeft: "1px !important"
+      }}>
         <Paper elevation={0}>
           <MapLocation />
         </Paper>
@@ -90,39 +120,37 @@ function MeterData() {
       {/* Charts for Detail of Meter Profile */}
       <Grid item lg={6} md={6} xl={6} xs={12}>
         <Card>
-          <Voltage 
-            // valtageValues={state.valtageValues} 
-          />
+          <Voltage valtageValues={state.valtageValues} />
         </Card>
       </Grid>
       <Grid item lg={6} md={6} xl={6} xs={12}>
         <Card>
-          <Current />
+          <Current currentValues = {state.currentValues} />
         </Card>
       </Grid>
       <Grid item lg={6} md={6} xl={6} xs={12}>
         <Card>
-          <RealPower />
+          <RealPower power_factorValues={state.power_factorValues}/>
         </Card>
       </Grid>
       <Grid item lg={6} md={6} xl={6} xs={12}>
         <Card>
-          <ActivePower />
+          <ActivePower active_powerValues={state.active_powerValues}/>
         </Card>
       </Grid>
       <Grid item lg={6} md={6} xl={6} xs={12}>
         <Card>
-          <ReactivePower />
+          <ReactivePower reactive_powerValues={state.reactive_powerValues}/>
         </Card>
       </Grid>
       <Grid item lg={6} md={6} xl={6} xs={12}>
         <Card>
-          <ApparentPower />
+          <ApparentPower apparent_powerValues={state.apparent_powerValues} />
         </Card>
       </Grid>
       <Grid item lg={6} md={6} xl={6} xs={12}>
         <Card>
-          <Frequency />
+          <Frequency frequencyValues={state.frequencyValues} />
         </Card>
       </Grid>
 

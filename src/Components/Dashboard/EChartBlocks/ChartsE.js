@@ -4948,7 +4948,7 @@ export const ChartsE = () => {
 						trigger: 'axis'
 					},
 					xAxis: {
-						data: data.map(function(item) {
+						data: data?.map(function(item) {
 							return item[0];
 						})
 					},
@@ -5006,7 +5006,7 @@ export const ChartsE = () => {
 					series: {
 						name: 'Meter',
 						type: 'line',
-						data: data.map(function(item) {
+						data: data?.map(function(item) {
 							return item[1];
 						}),
 						markLine: {

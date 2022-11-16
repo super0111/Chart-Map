@@ -4934,7 +4934,8 @@ const data = [
 	[ '2015-02-24', 207 ]
 ];
 
-export const ApparentPower = () => {
+export const ApparentPower = (props) => {
+	const data = props.apparent_powerValues;
 	return (
 		<div className={'echarts-new'}>
 			<ReactEcharts
@@ -4949,7 +4950,7 @@ export const ApparentPower = () => {
 						trigger: 'axis'
 					},
 					xAxis: {
-						data: data.map(function(item) {
+						data: data?.map(function(item) {
 							return item[0];
 						})
 					},
@@ -5007,7 +5008,7 @@ export const ApparentPower = () => {
 					series: {
 						name: 'Meter',
 						type: 'line',
-						data: data.map(function(item) {
+						data: data?.map(function(item) {
 							return item[1];
 						}),
 						markLine: {

@@ -134,7 +134,9 @@ const WrappedMap = withScriptjs(withGoogleMap(Map));
 export default function MapLocation() {
 	return (
 		<main>
-			<Container>
+			<Container sx={{
+				padding: "0 0 0 10px !important",
+			}}>
 				<Card>
 					<WrappedMap
 						googleMapURL={
@@ -142,7 +144,7 @@ export default function MapLocation() {
 						}
 						loadingElement={<div style={{ height: `100%` }} />}
 						containerElement={<div style={{ height: `fit-content` }} />}
-						mapElement={<div style={{ height: `58vh` }} />}
+						mapElement={<div style={{ height: `71.5vh` }} />}
 					/>
 				</Card>
 			</Container>
