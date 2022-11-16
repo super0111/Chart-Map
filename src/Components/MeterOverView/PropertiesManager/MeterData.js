@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Paper, Card } from '@mui/material';
+import Moment from 'moment';
 
 // import TransactionHistory from './TransactionHistory';
 import Livechart from '../Livechart';
@@ -40,7 +41,9 @@ function MeterData() {
         console.log(" data[i].voltage",  data[i].voltage)
         console.log(" data[i].record_time",  data[i].record_time)
         const time = new Date(data[i].record_time);
-        console.log("timememee", time.toString());
+        const recodeTime = Moment(time).format('YYYY-MM-DD')
+        console.log("recodeTime", recodeTime.toString());
+
 
         datas.push(...datas, data[i].voltage);  
         // setState({ valtageValues: datas });
