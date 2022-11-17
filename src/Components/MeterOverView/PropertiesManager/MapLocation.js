@@ -144,7 +144,7 @@ export default function MapLocation() {
 						}
 						loadingElement={<div style={{ height: `100%` }} />}
 						containerElement={<div style={{ height: `fit-content` }} />}
-						mapElement={<div style={{ height: `71.5vh` }} />}
+						mapElement={<div style={{ height: `61.5vh` }} />}
 					/>
 				</Card>
 			</Container>
