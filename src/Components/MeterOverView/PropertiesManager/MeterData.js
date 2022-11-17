@@ -39,7 +39,6 @@ function MeterData() {
 	
 			const api_call = await fetch(request);
 			let data = await api_call.json();
-      console.log("originalllll dataa", data)
       const voltage_data = data.map((item) => {
         const time = new Date(item.record_time);
         const recodeTime = Moment(time).format('YYYY-MM-DD').toString();
