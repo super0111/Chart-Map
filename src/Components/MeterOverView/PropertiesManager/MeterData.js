@@ -16,7 +16,6 @@ import ApparentPower from '../../Dashboard/EChartBlocks/ApparentPower';
 import Frequency from '../../Dashboard/EChartBlocks/Frequency';
 
 function MeterData() {
-	// const [ state, setState ] = useState([]);
 	const [ state, setState ] = useState({
     valtageValues: [],
     currentValues: [],
