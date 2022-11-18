@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
-
+import Moment from 'moment';
 import { Card, CardHeader, CardContent, CardActions, Divider, Button } from '@mui/material';
+import palette from './theme/palette';
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
@@ -10,7 +11,9 @@ import { data, options } from './Chart';
 
 const WeeklyBargraphs = (props) => {
 	const { className, ...rest } = props;
-	const [ state, setState ] = useState();
+	const [ state, setState ] = useState({
+		energy_data: [],
+	});
 
 
 	useEffect( ()=> {
@@ -24,15 +27,32 @@ const WeeklyBargraphs = (props) => {
 			});
 	
 			const api_call = await fetch(request);
-			let data = await api_call.json();
-      console.log("energy datatata", data)
-
-			// setState({
-        
-      // });
+			const data = await api_call.json();
+      const energy_data = data.map((item) => {
+        const recodeTime = Moment(item.record_time).format('YYYY-MM-DD').toString();
+        return item.active_energy
+      });
+			setState({energy_data: energy_data})
+			
 		}
 		fetchPosts();
 	}, [])
+	
+const data = {
+	labels: [ 'Mon', 'Tues', 'Wed', 'Thrus', 'Fri', 'Sat', 'Sun' ],
+	datasets: [
+		{
+			label: 'This week',
+			backgroundColor: palette.primary.main,
+			data: state.energy_data
+		},
+		{
+			label: 'Last week',
+			backgroundColor: palette.neutral,
+			data: state.energy_data.slice(6)
+		}
+	]
+};
 
 	return (
 		<Card {...rest}>
