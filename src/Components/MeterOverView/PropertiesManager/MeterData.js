@@ -6,6 +6,7 @@ import Moment from 'moment';
 import Livechart from '../Livechart';
 // import MeterInformation from './MeterInformation';
 import WeeklyBargraphs from '../AreaPlot/WeeklyBargraphs';
+import PowerEnergyCharts from '../PowerEnergyCharts';
 import MapLocation from './MapLocation';
 import Voltage from '../../Dashboard/EChartBlocks/Voltage';
 import Current from '../../Dashboard/EChartBlocks/Current';
@@ -107,6 +108,11 @@ function MeterData() {
       }}>
         <Paper elevation={0}>
           <MapLocation />
+        </Paper>
+      </Grid>
+      <Grid item lg={12} md={12} xl={12} xs={12}>
+        <Paper elevation={0}>
+          <PowerEnergyCharts />
         </Paper>
       </Grid>
       {/* Recent Deposits md={4} lg={3}*/}

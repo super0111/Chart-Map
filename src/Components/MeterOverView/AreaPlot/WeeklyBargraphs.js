@@ -30,7 +30,7 @@ const WeeklyBargraphs = (props) => {
 			const data = await api_call.json();
       const energy_data = data.map((item) => {
         const recodeTime = Moment(item.record_time).format('YYYY-MM-DD').toString();
-        return item.active_energy
+        return item.active_energy;
       });
 			setState({energy_data: energy_data})
 			

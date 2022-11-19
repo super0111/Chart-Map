@@ -144,35 +144,33 @@ const mainChartOpts = {
 };
 export default function Livechart() {
 	return (
-		<div>
-			<Row>
-				<Col>
-					<Card>
-						<CardBody>
-							<Row>
-								<Col sm='5'>
-									<CardTitle className='mb-0'>Meter Power Consuption</CardTitle>
-								</Col>
-								<Col sm='7' className='d-none d-sm-inline-block'>
-									<Button color='primary' className='float-right'>
-										<i className='icon-cloud-download' />
-									</Button>
-									<ButtonToolbar className='float-right' aria-label='Toolbar with button groups'>
-										<ButtonGroup className='mr-3' aria-label='First group'>
-											<Button color='outline-secondary'>Day</Button>
-											<Button color='outline-secondary'>Month</Button>
-											<Button color='outline-secondary'>Year</Button>
-										</ButtonGroup>
-									</ButtonToolbar>
-								</Col>
-							</Row>
-							<div className='chart-wrapper' style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
-								<Line data={mainChart} options={mainChartOpts} height={300} />
-							</div>
-						</CardBody>
-					</Card>
-				</Col>
-			</Row>
-		</div>
+		<Row>
+			<Col>
+				<Card>
+					<CardBody>
+						<Row>
+							<Col sm='5'>
+								<CardTitle style={{fontSize: 20}} className='mb-0'>Meter Power Consuption</CardTitle>
+							</Col>
+							<Col sm='7' className='d-none d-sm-inline-block'>
+								<Button color='primary' className='float-right'>
+									<i className='icon-cloud-download' />
+								</Button>
+								<ButtonToolbar className='float-right' aria-label='Toolbar with button groups'>
+									<ButtonGroup className='mr-3' aria-label='First group'>
+										<Button color='outline-secondary'>Day</Button>
+										<Button color='outline-secondary'>Month</Button>
+										<Button color='outline-secondary'>Year</Button>
+									</ButtonGroup>
+								</ButtonToolbar>
+							</Col>
+						</Row>
+						<div className='chart-wrapper' style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
+							<Line data={mainChart} options={mainChartOpts} height={300} />
+						</div>
+					</CardBody>
+				</Card>
+			</Col>
+		</Row>
 	);
 }
