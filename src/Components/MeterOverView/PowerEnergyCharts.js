@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import Moment from 'moment';
 import { Card, CardHeader, CardContent, CardActions, Divider, Button } from '@mui/material';
-import palette from './AreaPlot/theme/palette';
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import palette from './AreaPlot/theme/palette';
 
 export const options = {
 	responsive: true,
