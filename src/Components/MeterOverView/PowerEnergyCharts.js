@@ -26,6 +26,10 @@ export const options = {
 	},
 	layout: { padding: 0 },
 	scales: {
+		y: {
+			suggestedMin: 50,
+			suggestedMax: 100
+	},
 		xAxes: [
 			{
 				barThickness: 12,
@@ -46,7 +50,7 @@ export const options = {
 				ticks: {
 					fontColor: palette.text.secondary,
 					beginAtZero: true,
-					min: 0
+					min: 0,
 				},
 				gridLines: {
 					borderDash: [ 2 ],
