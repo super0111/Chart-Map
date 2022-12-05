@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, Paper } from '@mui/material';
-
 import TotalMeters from './MeterCounts/TotalMeters';
 import ActiveMeters from './MeterCounts/ActiveMeters';
 import PowerSummary from './MeterCounts/PowerSummary';
@@ -9,8 +8,6 @@ import AreaCharts from './AreaPlot/AreaChart';
 import WarningTables from './Tables/WarningTables';
 import ChartsE from './EChartBlocks/ChartsE';
 import ScatterChart from './EChartBlocks/ScatterChart';
-// import Home from '../Maps/home';
-// import SystemChart from './SystemChart';
 
 export default function Dashboard() {
 
