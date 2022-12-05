@@ -1,11 +1,9 @@
 import React from 'react';
 import { Layout, Navigation, Content, Header, HeaderRow } from 'react-mdl';
 import { NavLink } from 'react-router-dom';
-
 import { Box } from '@mui/material';
 
 import Main from './Components/main';
-
 import img from './Data/Logo.png';
 import img2 from './Data/Logo_burned.png';
 import homeImage from './home_icon_white.png';
